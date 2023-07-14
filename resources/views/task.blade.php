@@ -10,10 +10,8 @@
     <!-- Botão para voltar à página inicial -->
     <a href="{{ route('listas.index') }}" class="back-button">Voltar</a>
 
-    <h1 class="center">Editar Tarefa</h1>
-
     <!-- Título da lista -->
-    <h2 class="center">{{ $lista->title }}</h2>
+    <h1 class="center">{{ $lista->title }}</h1>
 
     <!-- Número de tarefas concluídas / Número de tarefas totais -->
     <p class="task-stats">{{ $lista->completed_tasks }} / {{ $lista->total_tasks }}</p>
@@ -31,26 +29,31 @@
         @foreach ($lista->tarefas as $tarefa)
             <li>
                 <div class="task">
-                    <!-- Botão para marcar como concluída -->
-                    <form action="{{ route('tarefas.update', $tarefa) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <input type="checkbox" name="completed" value="1" {{ $tarefa->completed ? 'checked' : '' }}>
-                        {{ $tarefa->title }}
-                        <button type="submit">Salvar</button>
-                    </form>
+                    <!-- Título da tarefa -->
+                    <span class="task-title">{{ $tarefa->title }}</span>
+                    
+                    <!-- Verifica se a tarefa está concluída -->
+                    @if ($tarefa->completed)
+                        <span class="completed-message">Concluída</span>
+                    @else
+                        <!-- Botão para marcar como concluída -->
+                        <form action="{{ route('tarefas.update', $tarefa) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <button type="submit" class="task-button">Concluir</button>
+                        </form>
+                    @endif
 
                     <!-- Botão para excluir tarefa -->
                     <form action="{{ route('tarefas.destroy', $tarefa) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit">Excluir</button>
+                        <button type="submit" class="delete-button">Excluir</button>
                     </form>
                 </div>
             </li>
         @endforeach
     </ul>
 
-    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js"></script>
 </body>
 </html>

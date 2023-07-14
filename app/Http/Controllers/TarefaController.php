@@ -20,9 +20,8 @@ class TarefaController extends Controller
 
     public function update(Request $request, Tarefa $tarefa)
     {
-        $tarefa->update([
-            'completed' => $request->has('completed')
-        ]);
+        $tarefa->completed = true;
+        $tarefa->save();
 
         return redirect()->back();
     }

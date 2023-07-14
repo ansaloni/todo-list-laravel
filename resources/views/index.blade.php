@@ -23,21 +23,21 @@
                 <div class="list-header">
                     <!-- Ícone de lista concluída (opcional) -->
                     @if ($lista->completed)
-                        <i class="fas fa-check-circle"></i>
+                        <span class="completed-icon"></span>
                     @endif
 
                     <!-- Título da lista e botões -->
                     <a href="{{ route('listas.show', $lista) }}">{{ $lista->title }}</a>
+                    
+                    <!-- Botão para excluir lista -->
                     <form action="{{ route('listas.destroy', $lista) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit">Excluir</button>
+                        <button type="submit" class="delete-button">Excluir</button>
                     </form>
                 </div>
             </li>
         @endforeach
     </ul>
-
-    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js"></script>
 </body>
 </html>
