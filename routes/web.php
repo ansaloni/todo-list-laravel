@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ListaController;
-
+use App\Http\Controllers\TarefaController;
 
 /*
 |--------------------------------------------------------------------------
